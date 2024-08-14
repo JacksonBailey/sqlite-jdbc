@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+pushd $HOME/Code/sqlite/bld
+
+make clean
+
+# From sqlite-jdbc's Makefile
+NEEDED_CFLAGS="\
+-DSQLITE_ENABLE_LOAD_EXTENSION=1 \
+-DSQLITE_HAVE_ISNAN \
+-DHAVE_USLEEP=1 \
+-DSQLITE_ENABLE_COLUMN_METADATA \
+-DSQLITE_CORE \
+-DSQLITE_ENABLE_FTS3 \
+-DSQLITE_ENABLE_FTS3_PARENTHESIS \
+-DSQLITE_ENABLE_FTS5 \
+-DSQLITE_ENABLE_RTREE \
+-DSQLITE_ENABLE_STAT4 \
+-DSQLITE_ENABLE_DBSTAT_VTAB \
+-DSQLITE_ENABLE_MATH_FUNCTIONS \
+-DSQLITE_THREADSAFE=1 \
+-DSQLITE_DEFAULT_MEMSTATUS=0 \
+-DSQLITE_DEFAULT_FILE_PERMISSIONS=0666 \
+-DSQLITE_MAX_VARIABLE_NUMBER=250000 \
+-DSQLITE_MAX_MMAP_SIZE=1099511627776 \
+-DSQLITE_MAX_LENGTH=2147483647 \
+-DSQLITE_MAX_COLUMN=32767 \
+-DSQLITE_MAX_SQL_LENGTH=1073741824 \
+-DSQLITE_MAX_FUNCTION_ARG=127 \
+-DSQLITE_MAX_ATTACHED=125 \
+-DSQLITE_MAX_PAGE_COUNT=4294967294 \
+-DSQLITE_DISABLE_PAGECACHE_OVERFLOW_STATS \
+"
+
+# -DSQLITE_THREADSAFE=0 removed because sqlite-jdbc uses -DSQLITE_THREADSAFE=1
+# -DSQLITE_DEFAULT_MEMSTATUS=0 removed because sqlite-jdbc already had the option
+# -DSQLITE_OMIT_DECLTYPE removed because error: "Must not define both SQLITE_OMIT_DECLTYPE and SQLITE_ENABLE_COLUMN_METADATA"
+# -DSQLITE_OMIT_SHARED_CACHE removed because ld: Undefined symbols: _sqlite3_enable_shared_cache
+# -DSQLITE_OMIT_PROGRESS_CALLBACK removed because ld: Undefined symbols: _sqlite3_progress_handler
+# -DSQLITE_OMIT_AUTOINIT removed because of segfaults -- sqlite docs mention this is a side effect of not manually init
+# -DSQLITE_DQS=0 removed because Maven BackupTest.backupAndRestore:35->createTableAndInsertRows:59 » SQLite [SQLITE_ERROR] SQL error or missing database (no such column: "leo" - should this be a string literal in single-quotes?)
+
+EXTRA_CFLAGS="\
+\
+\
+\
+-DSQLITE_DEFAULT_WAL_SYNCHRONOUS=1 \
+-DSQLITE_LIKE_DOESNT_MATCH_BLOBS \
+-DSQLITE_MAX_EXPR_DEPTH=0 \
+\
+-DSQLITE_OMIT_DEPRECATED \
+\
+\
+-DSQLITE_USE_ALLOCA \
+\
+-DSQLITE_STRICT_SUBTYPE=1 \
+"
+
+export CFLAGS="$NEEDED_CFLAGS"
+# export CFLAGS="$NEEDED_CFLAGS $EXTRA_CFLAGS"
+
+../sqlite/configure && make
+
+# From https://www.sqlite.org/compile.html#recommended_compile_time_options
+RECOMMENDED_CFLAGS="\
+-DSQLITE_DQS=0 \
+-DSQLITE_THREADSAFE=0 \
+-DSQLITE_DEFAULT_MEMSTATUS=0 \
+-DSQLITE_DEFAULT_WAL_SYNCHRONOUS=1 \
+-DSQLITE_LIKE_DOESNT_MATCH_BLOBS \
+-DSQLITE_MAX_EXPR_DEPTH=0 \
+-DSQLITE_OMIT_DECLTYPE \
+-DSQLITE_OMIT_DEPRECATED \
+-DSQLITE_OMIT_PROGRESS_CALLBACK \
+-DSQLITE_OMIT_SHARED_CACHE \
+-DSQLITE_USE_ALLOCA \
+-DSQLITE_OMIT_AUTOINIT \
+-DSQLITE_STRICT_SUBTYPE=1 \
+"
+
+popd
+
+make clean
+make native SQLITE_OBJ=$HOME/Code/sqlite/bld/sqlite3.o SQLITE_HEADER=$HOME/Code/sqlite/bld/sqlite3.h
+mvn verify
+
+pushd $HOME/Code/sqlite/bld
+
+make devtest
+# https://sqlite.org/forum/info/48537da9a82444d3
+
+popd
