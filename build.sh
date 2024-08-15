@@ -14,18 +14,18 @@ THE_SQLITE_JDBC="${HOME}/PersonalCode/sqlite-jdbc"
 
 # From sqlite-jdbc's Makefile
 export CFLAGS=""
-# export CFLAGS+=" -DSQLITE_ENABLE_LOAD_EXTENSION=1" # Unlisted
+export CFLAGS+=" -DSQLITE_ENABLE_LOAD_EXTENSION=1" # Unlisted, added all non-max
 export CFLAGS+=" -DSQLITE_HAVE_ISNAN" # Seems safe enough
-# export CFLAGS+=" -DHAVE_USLEEP=1" # Unlisted
+export CFLAGS+=" -DHAVE_USLEEP=1" # Unlisted, added all non-max
 export CFLAGS+=" -DSQLITE_ENABLE_COLUMN_METADATA" # _sqlite3_column_table_name
-# export CFLAGS+=" -DSQLITE_CORE" # Unlisted
+export CFLAGS+=" -DSQLITE_CORE" # Unlisted, added all non-max
 export CFLAGS+=" -DSQLITE_ENABLE_FTS3" # ExtensionTest.extFTS3
 export CFLAGS+=" -DSQLITE_ENABLE_FTS3_PARENTHESIS" # Seems important with FTS3
 export CFLAGS+=" -DSQLITE_ENABLE_FTS5" # ExtensionTest.extFTS5
-# export CFLAGS+=" -DSQLITE_ENABLE_RTREE"
-# export CFLAGS+=" -DSQLITE_ENABLE_STAT4"
-# export CFLAGS+=" -DSQLITE_ENABLE_DBSTAT_VTAB"
-# export CFLAGS+=" -DSQLITE_ENABLE_MATH_FUNCTIONS"
+export CFLAGS+=" -DSQLITE_ENABLE_RTREE" # added all non-max
+export CFLAGS+=" -DSQLITE_ENABLE_STAT4" # added all non-max
+export CFLAGS+=" -DSQLITE_ENABLE_DBSTAT_VTAB" # added all non-max
+export CFLAGS+=" -DSQLITE_ENABLE_MATH_FUNCTIONS" # added all non-max
 export CFLAGS+=" -DSQLITE_THREADSAFE=1" # Seems critically important
 export CFLAGS+=" -DSQLITE_DEFAULT_MEMSTATUS=0" # A recommended option
 export CFLAGS+=" -DSQLITE_DEFAULT_FILE_PERMISSIONS=0666" # Seems safe and important
