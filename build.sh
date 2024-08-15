@@ -45,10 +45,11 @@ make
 
 # COMPILE AND TEST SQLITE-JDBC
 cd ${THE_SQLITE_JDBC} # Back into sqlite-jdbc
+git restore src/main/resources/org/sqlite/native/Mac/aarch64/libsqlitejdbc.dylib
 make clean
-mvn clean
+mvn -T 1C clean
 make native SQLITE_OBJ=${THE_BLD}/sqlite3.o SQLITE_HEADER=${THE_BLD}/sqlite3.h
-mvn verify
+mvn -T 1C verify
 
 # TEST SQLITE
 cd ${THE_BLD} # Into sqlite build zone
