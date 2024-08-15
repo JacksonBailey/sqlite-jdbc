@@ -39,7 +39,7 @@ export CFLAGS+=" -DSQLITE_ENABLE_COLUMN_METADATA" # Enabled because _sqlite3_col
 
 # COMPILE SQLITE
 cd ${THE_BLD} # Into sqlite build zone
-make clean
+make clean || true
 ${THE_TOP}/configure
 make
 
