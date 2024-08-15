@@ -14,11 +14,11 @@ THE_SQLITE_JDBC="${HOME}/PersonalCode/sqlite-jdbc"
 
 # From sqlite-jdbc's Makefile
 export CFLAGS=""
-# export CFLAGS+=" -DSQLITE_ENABLE_LOAD_EXTENSION=1"
+# export CFLAGS+=" -DSQLITE_ENABLE_LOAD_EXTENSION=1" # Unlisted
 # export CFLAGS+=" -DSQLITE_HAVE_ISNAN"
-# export CFLAGS+=" -DHAVE_USLEEP=1"
+# export CFLAGS+=" -DHAVE_USLEEP=1" # Unlisted
 export CFLAGS+=" -DSQLITE_ENABLE_COLUMN_METADATA" # _sqlite3_column_table_name
-# export CFLAGS+=" -DSQLITE_CORE"
+# export CFLAGS+=" -DSQLITE_CORE" # Unlisted
 export CFLAGS+=" -DSQLITE_ENABLE_FTS3" # ExtensionTest.extFTS3
 export CFLAGS+=" -DSQLITE_ENABLE_FTS3_PARENTHESIS" # Seems important with FTS3
 export CFLAGS+=" -DSQLITE_ENABLE_FTS5" # ExtensionTest.extFTS5
