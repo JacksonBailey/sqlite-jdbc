@@ -15,11 +15,11 @@ export CFLAGS=""
 # export CFLAGS+=" -DSQLITE_ENABLE_LOAD_EXTENSION=1"
 # export CFLAGS+=" -DSQLITE_HAVE_ISNAN"
 # export CFLAGS+=" -DHAVE_USLEEP=1"
-export CFLAGS+=" -DSQLITE_ENABLE_COLUMN_METADATA" # Enabled because _sqlite3_column_table_name
+export CFLAGS+=" -DSQLITE_ENABLE_COLUMN_METADATA" # _sqlite3_column_table_name
 # export CFLAGS+=" -DSQLITE_CORE"
-# export CFLAGS+=" -DSQLITE_ENABLE_FTS3"
+export CFLAGS+=" -DSQLITE_ENABLE_FTS3" # ExtensionTest.extFTS3
 # export CFLAGS+=" -DSQLITE_ENABLE_FTS3_PARENTHESIS"
-# export CFLAGS+=" -DSQLITE_ENABLE_FTS5"
+export CFLAGS+=" -DSQLITE_ENABLE_FTS5" # ExtensionTest.extFTS5
 # export CFLAGS+=" -DSQLITE_ENABLE_RTREE"
 # export CFLAGS+=" -DSQLITE_ENABLE_STAT4"
 # export CFLAGS+=" -DSQLITE_ENABLE_DBSTAT_VTAB"
