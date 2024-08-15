@@ -6,9 +6,9 @@ set -euo pipefail
 # by having an env var named TOP. It serves the same purpose and should have the
 # same value (minus the relative part), but just in case! And apprently now I am
 # using this THE_BLAH syntax for locations lol.
-THE_TOP="${HOME}/Code/sqlite/sqlite"
-THE_BLD="${HOME}/Code/sqlite/bld"
-THE_SQLITE_JDBC="${HOME}/Code/sqlite-jdbc"
+THE_TOP="${HOME}/PersonalCode/sqlite/sqlite"
+THE_BLD="${HOME}/PersonalCode/sqlite/bld"
+THE_SQLITE_JDBC="${HOME}/PersonalCode/sqlite-jdbc"
 
 # From sqlite-jdbc's Makefile
 export CFLAGS=""
