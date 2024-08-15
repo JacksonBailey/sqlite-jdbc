@@ -15,7 +15,7 @@ THE_SQLITE_JDBC="${HOME}/PersonalCode/sqlite-jdbc"
 # From sqlite-jdbc's Makefile
 export CFLAGS=""
 # export CFLAGS+=" -DSQLITE_ENABLE_LOAD_EXTENSION=1" # Unlisted
-# export CFLAGS+=" -DSQLITE_HAVE_ISNAN"
+export CFLAGS+=" -DSQLITE_HAVE_ISNAN" # Seems safe enough
 # export CFLAGS+=" -DHAVE_USLEEP=1" # Unlisted
 export CFLAGS+=" -DSQLITE_ENABLE_COLUMN_METADATA" # _sqlite3_column_table_name
 # export CFLAGS+=" -DSQLITE_CORE" # Unlisted
