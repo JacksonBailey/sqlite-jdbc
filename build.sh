@@ -10,6 +10,8 @@ THE_TOP="${HOME}/PersonalCode/sqlite/sqlite"
 THE_BLD="${HOME}/PersonalCode/sqlite/bld"
 THE_SQLITE_JDBC="${HOME}/PersonalCode/sqlite-jdbc"
 
+# If says unlisted that means it isn't here: https://www.sqlite.org/compile.html
+
 # From sqlite-jdbc's Makefile
 export CFLAGS=""
 # export CFLAGS+=" -DSQLITE_ENABLE_LOAD_EXTENSION=1"
@@ -24,7 +26,7 @@ export CFLAGS+=" -DSQLITE_ENABLE_FTS5" # ExtensionTest.extFTS5
 # export CFLAGS+=" -DSQLITE_ENABLE_STAT4"
 # export CFLAGS+=" -DSQLITE_ENABLE_DBSTAT_VTAB"
 # export CFLAGS+=" -DSQLITE_ENABLE_MATH_FUNCTIONS"
-# export CFLAGS+=" -DSQLITE_THREADSAFE=1"
+export CFLAGS+=" -DSQLITE_THREADSAFE=1" # Seems critically important
 # export CFLAGS+=" -DSQLITE_DEFAULT_MEMSTATUS=0"
 # export CFLAGS+=" -DSQLITE_DEFAULT_FILE_PERMISSIONS=0666"
 # export CFLAGS+=" -DSQLITE_MAX_VARIABLE_NUMBER=250000"
